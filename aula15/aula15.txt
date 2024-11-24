@@ -1,0 +1,125 @@
+Aula15 21 de Novembro, 2024 - ANOTAÇÕES
+
+-> Uma vez configurado a partir do momento que foi feita a migration no laravel e continuar o projeto de onde parou
+iniciar no computador normalmente e executar o seguinte comando:
+
+php artisan migrate
+
+-> ele vai exigir a criação do banco de dados caso ele nao exista, confirmar com "yes" e continuar
+-> verificar se tudo esta certo
+
+--------------------------------------
+Ao executar um projeto caso de erro de conexao similar:
+
+file_put_contents(C:\laravel\prjlogin\storage\framework/sessions/LsBmBv4bBLFlP9xdPMUF90MQmqWrR4Jn64kI46zf): 
+Failed to open stream: No such file or directory
+
+-> executar os seguintes comandos para limpar a memoria
+
+-> php artisan config:clear
+-> php artisan cache:clear
+-> php artisan route:clear
+-> php artisan view:clear
+
+
+------------------------------------------------------------------------
+Login, usuario
+
+-> olhar no projeto do professor a model, view, controller e aplicar no seu projeto 'User'
+
+------------------------------------------------------------------------
+Atividade
+-> pode usar: (verificar material aula remota)
+max, count,
+
+-------------------------------------------
+Dashboard/ exemplo
+
+1.implementação de graficos
+
+-> criar view 
+-> nomepagina.blade
+-> rota na web grafico
+-> como  deixar dinamico de acordo ao seu banco e projeto? (pode usar um modelo pronto, por exemplo do google)
+-> existem varias APIs de grafico, pode usar outras
+
+--------------------------------------------------------
+No Postman /API
+
+-> no ROUTES get, criar uma workspace de acordo o request em rename "listarClientes"
+-> new request, listarClientes:
+exemplo: localhost:8000/api/cliente
+-> caso de erro no Postman, testar na web e verificar se tudo deu certo
+->fazer um novo insert pelo banco phpmyadmin e testar a rotina(metodo) novamente
+
+----------------------------------------------------------
+GET
+
+-> a partir do select do sql, onde foi criado uma função
+
+
+----------------------------------------------------------
+INSERT
+
+-> novo projeto
+1. usar POST para inserir 
+2. ter mvc, no controler metodo store ou storeAPI
+3. no API em json
+4. no Postman:
+->rota api, localhost:8000/api/cliente
+-> raw: JSON
+-> exemplo:
+{
+"nome":
+"cpf:" 
+}
+
+-> dar send/enviar
+-> averiguar se o insert foi realizado
+----------------------------------------------------------
+UPDATE
+-> averiguar se a model foi importada
+
+metodo update api()/foto
+
+-> no sql insert where e filtros upadte mas essa rotina já existe no laravel
+-> na rota api metodo put e colocar de acordo o metodo criado
+-> no postman, nova rotina, verbo put, localhost:8000/api/cliente/{id(4)}
+-> exemplo:
+{
+"nomeCli": "nome",
+"cpf": "1231231234",
+"email": "nome@gmail.com"
+}
+-> verificar se os campos estão iguais, nunca deixar os campos vazios ou
+-> e dar SEND
+
+-----------------------------------
+DELETE
+
+-> se faz do mesmo modo que o update, apenas modificar de acordo ao metodo
+-> verificar se deu certo
+
+---------------------------------------
+Clientes cadastrados (exemplo)/DESAFIO
+
+-> count
+-> no clientecontroller
+-> importar db
+-> criar o metodo listarContatosSql
+-> averiguar no banco de dados o count
+-> fazer no api.php, metodo GET, pode mudar o campo do nome
+-> se usar "as" colocar aspas duplas
+-> no Postman:
+1. GET e colocar url
+2.  
+--------------------------------
+Observações:
+
+termo: criar a rota
+
+rota/route = endpoint
+
+-> sempre que criar uma função com select especifico criar o metodo e criar a rota
+
+
