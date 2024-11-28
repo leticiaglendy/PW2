@@ -1,0 +1,291 @@
+PRIMEIROS PASSOS:
+
+1 - Ligar o computador
+2 - Abrir o meu pen-drive e achar a pasta que está o projeto Laravel
+3 - Copiar a pasta laravel no C: do computador
+4 - Baixar o composer no computador da Etec
+5 - Abrir o prompt e digitar os comandos na seguinte sequência:
+
+	- cd\
+	- mkdir laravel(serve para criar uma pasta, se já existir só digite o comando abaixo)
+	- cd laravel
+	- cd laravel aula
+	- code .
+	- php artisan serve
+	- abrir o navegador e na url digitar: localhost:8000
+
+6 - Digitar no navegador: http://localhost/phpmyadmin/
+7 - No prompt crie o model e controller digitando na seguinte sequência:
+
+	- php artisan make:controller NomeController --resource
+	- php artisan make:model Nome
+	- php artisan serve(inicia o bagulhinho lá, sempre fazer isso quando criar o model e controller))
+
+8 - No MySql online criar as tabelas:
+
+CREATE DATABASE Papelaria;
+USE Papelaria;
+
+CREATE TABLE tbCategoria(
+	id_categoria int PRIMARY key AUTO_INCREMENT,
+	nome_categoria varchar(50),
+	descricao varchar(50)
+);
+
+CREATE TABLE tbProduto(
+	id_produto int PRIMARY key AUTO_INCREMENT,
+	nome_produto varchar(50),
+	quantidade int(10),
+    descricao varchar(50),
+    valor varchar(100),
+    data_cadastro DATE
+);
+
+CREATE TABLE tbContato(
+	id_contato int PRIMARY key AUTO_INCREMENT,
+	nome varchar(50),
+	email varchar(50),
+    telefone varchar(11)
+);
+
+
+INSERT INTO tbCategoria (nome_categoria, descricao) 
+VALUES 
+('Material Escolar', 'Produtos escolares básicos'),
+('Papelaria de Escritório', 'Produtos para escritório'),
+('Tintas e Pincéis', 'Materiais artísticos'),
+('Tecnologia', 'Acessórios tecnológicos'),
+('Decoração', 'Itens de decoração para escritório');
+
+INSERT INTO tbProduto (nome_produto, quantidade, descricao, valor, data_cadastro) 
+VALUES 
+('Caderno Espiral', 150, 'Caderno 96 folhas', 'R$ 12,90', '2024-09-22'),
+('Caneta Esferográfica Azul', 500, 'Caneta azul básica', 'R$ 2,50', '2024-09-20'),
+('Papel Sulfite A4', 300, 'Resma de papel 500 folhas', 'R$ 23,90', '2024-09-18'),
+('Grampeador', 50, 'Grampeador médio', 'R$ 19,00', '2024-09-15'),
+('Tinta para Impressora', 20, 'Tinta preta para impressora', 'R$ 85,00', '2024-09-10');
+
+INSERT INTO tbContato (nome, email, telefone) 
+VALUES 
+('João Silva', 'joao.silva@gmail.com', 11987654321),
+('Maria Souza', 'maria.souza@yahoo.com', 11976543210),
+('Pedro Oliveira', 'pedro.oliveira@outlook.com', 21998765432),
+('Ana Lima', 'ana.lima@gmail.com', 31987654321),
+('Carlos Costa', 'carlos.costa@hotmail.com', 41987654321);
+
+9 - Conectar o banco ao laravel com o vscode.
+
+	- .env
+	- DB_DATABASE= Nometabela
+
+10 - Digite no google: http://localhost:8000/nomedaview(exemplo: http://localhost:8000/categoria)
+11 - Crie as views indo em FILE e digitando nomearquivo.blade.php
+12 - Em cada CONTROLLER digite dentro da aba index:
+
+		*isso significa que você está colocando informação nas páginas, primeiro você criou uma variável e deu o valor de categória, o controller/banco, e selecionou tudo*
+
+ public function index()
+    {
+        echo "123" //serve para ver se está funcionando na web
+    }
+
+public function index()
+    {
+        $categorias = Categoria::all();
+
+        foreach($categorias as $cat){
+            echo $cat->idCategoria;
+            echo $cat->categoria;
+        }
+    }
+
+		*na aba store digite o código a seguir para puxar as informações da tabela contato e mostrar na tela as informações*
+
+$contato = new Contato();
+            $contato->nomeContato = $request->txNome;
+            $contato->emailContato = $request->txEmail;
+            $contato->assuntoContato = $request->txAssunto;
+            $contato->mensagemContato = $request->txMensagem;
+
+            $contato ->save();
+
+            return redirect('/contato');
+
+		*Para usar uma API no controller crie a aba indexAPI e digite:*
+
+    public function indexApi(){
+        $contato = Contato::all();        
+        return $contato;   
+    }
+
+    public function storeApi(Request $request)
+    {
+        $categoria = new Contato();
+        $categoria->nome_categoria = $request->nome;
+        $categoria->descricao = $request->descricao;
+
+        $categoria ->save();
+        
+        return response()->json([
+            'message'=> 'Categoria criada com successo',
+            'code'=>200]
+        );        
+    }
+
+    public function destroyApi($id)
+    {
+        Categoria::where('id_categoria',$id)->delete();
+        
+        return response()->json([
+            'message'=> "Categoria removida com sucesso",
+            'code'=>200]
+        );        
+    }
+
+1? - Para fazer uma CONSULTA do seu gosto no SQL pelo laravel digite no CONTROLLER escolhido: 
+
+public function totalContatos(){
+	$sql = 'select count(*) total_contato from tbContato'; //all
+
+	$resposta = DB::select(sql);
+
+	return $resposta;
+}
+
+public function totalContatos(){
+	$sql = 'select max(*) nome_coluna from tbContato'; //all
+
+	$resposta = DB::select(sql);
+
+	return $resposta;
+}
+
+public function totalContatos(){
+	$sql = 'select min(*) nome_coluna from tbContato'; //all
+
+	$resposta = DB::select(sql);
+
+	return $resposta;
+}
+
+public function totalContatos(){
+	$sql = 'select sum(*) nome_coluna from tbContato'; //all
+
+	$resposta = DB::select(sql);
+
+	return $resposta;
+}
+
+public function totalContatos(){
+	$sql = 'select avg(*) nome_coluna from tbContato'; //all
+
+	$resposta = DB::select(sql);
+
+	return $resposta;
+}
+
+1? - Em cada MODEL digite: 
+
+protected $table = 'nometabela'; *está linkando com as tabelas criadas*
+protected $table = 'Categoria';
+protected $table = 'Produto';
+
+protected $table = 'Contato';
+public $fillable = ['idContato','nomeContato','','emailContato','assuntoContato','mensagemContato'];
+    public $timestamps = false;
+
+1? - Cada tabela terá a sua ROTA, então dentro da aba routes em WEB.PHP do laravel digite:
+
+*Para cada método(index, store etc) criado no CONTROLLER uma rota preisa ser criada*
+
+Route::get('/contato', function () {
+    return view('contato');
+});
+
+Route::get('/categoria', function () {
+    return view('categoria');
+});
+
+Route::get('/produto', function () {
+    return view('produto');
+});
+
+		*quando criar a view use a rota acima, depos deixe esta como comentário, pq ela só é usada enquanto a view não foi criada*
+
+// Route::get('/produto','App\Http\Controllers\ProdutoController@index');
+
+// Route::get('/contato','App\Http\Controllers\ContatoController@index');
+
+// Route::get('/categoria','App\Http\Controllers\CategoriaController@index');
+
+	*Após, vai criando uma rota para cada aba do controller, assim você vai pegar todas as informações do código e mostrará na web*
+
+//rotas categoria
+Route::get('/categoria','App\Http\Controllers\CategoriaController@index');
+Route::post('/categoria','App\Http\Controllers\CategoriaController@store');
+
+//rotas produto
+Route::get('/produto','App\Http\Controllers\ProdutoController@index');
+Route::post('/produto','App\Http\Controllers\ProdutoController@store');
+
+//rotas contato
+Route::get('/contato','App\Http\Controllers\ContatoController@index');
+Route::post('/contato','App\Http\Controllers\ContatoController@store');
+
+
+1? - Para criar uma MIGRATION digite: php artisan make:migration create_nometabela
+1? - Dentro da Migration coloque as informações da tabela(não esqueça de especificar o tipo de dado-String), por exemplo:
+
+    public function up()
+    {
+        Schema::create('tbproduto', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome',50)->nullable();
+            $table->integer('quantidade',50)->nullable();
+            $table->string('descricao',11)->nullable();
+		$table->integer('valor',11)->nullable();
+		$table->date('data_cadastro',11)->nullable();
+            $table->timestamps();
+        });
+    }
+
+
+
+1? - Para criar o database e/ou a tabela digite: php artisan migrate
+1? - Para linkar uma api com o laravel 
+1? - Para mexer no CSS pelo laravel crie uma pasta com o nome CSS dentro da pasta Public do laravel
+1? - Depois crie uma chamada style e vá nas views do laravel e puxe ele digitando no Head: <link rel="stylesheet" href="css/style.css"> - Todas as alterações, como colocar imagem(<img src="{!! asset('image/nomeimagem.jpg')!!}" />
+) serão feitas na View
+1? - Nas views faça o html da página(Pedir pro chat fazer um css simples)
+!? - Exibir dados em Json:
+
+		crie um método e vê se ele esta funcionando com a função echo, crie uma rota para ele e dentro do método digite:
+
+return response()->json{
+	nomemodel::get(), 200
+};
+
+1? - Inserção nas tabelas:
+
+*Primeiro precisamos do formulário na view*
+*Precisamos de duas variáveis no Model:
+	public $timestamps = false;
+	protected $fillable = ['nomecolunaquequerpreencher'];
+*
+*Precisaremos de uma rota:  Route::post('/genero/inserir','App\Http\Controllers\nomeController@store');*
+*preencher o metodo escolhido:
+	$generos = new GeneroModel();
+	$generos->genero = $request->txGenero;
+	$generos->save();
+	
+	return redirect()->action('App\Http\Controllers\nomeController@consultagenero')
+*
+
+CONTATO
+
+PRODUTO
+
+CATEGORIA
+
+
+	

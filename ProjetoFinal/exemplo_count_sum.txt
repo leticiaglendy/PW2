@@ -1,0 +1,32 @@
+CONTROLLER
+
+use Illuminate\Support\Facades\DB;
+
+-------------
+
+    public function quantidadeClientes(){
+
+        $sql = "select count(*) 'qtd_clientes' from tbcliente";
+            
+        $resposta = DB::select($sql);
+
+        return $resposta;
+    }
+
+    
+    public function somaIdsClientes(){
+
+        $sql = "select sum(idCli) 'total' from tbcliente";
+            
+        $resposta = DB::select($sql);
+
+        return $resposta;
+    }
+
+
+----------------------------
+
+Api.php
+
+Route::get('/qtd-cliente','App\Http\Controllers\ClienteController@quantidadeClientes');
+Route::get('/soma-ids','App\Http\Controllers\ClienteController@somaIdsClientes');
