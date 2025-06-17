@@ -1,0 +1,30 @@
+Atividade
+
+
+-> tela de login - formulario
+-> rotas
+-> controler
+-> model
+-> view / dashboard
+-> implementar o login de acordo o projeto passado pelo professor
+
+------------------------------------
+
+-> formulario cadastro de usuario e login
+-> fazer a parte web
+-> revisar a parte de api e verifiacr se a implementação de cada metodo funciona corretamente no postman
+-> rotina por funcionalidade CRUD
+
+------------------------------
+
+rota API Postman
+
+localhost:8000/api/soma-produto
+localhost:8000/api/maior-produto
+localhost:8000/api/menor-produto
+localhost:8000/api/media-produto
+
+localhost:8000/api/total-categoria
+
+localhost:8000/api/total-contato
+localhost:8000/api/listar-contato
