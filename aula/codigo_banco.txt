@@ -1,0 +1,65 @@
+CREATE DATABASE dbPapelaria;
+USE dbPapelaria;
+
+CREATE TABLE tbCategoria(
+	id_categoria int PRIMARY key AUTO_INCREMENT,
+	nome_categoria varchar(50),
+	descricao varchar(50)
+);
+
+CREATE TABLE tbProduto(
+	id_produto int PRIMARY key AUTO_INCREMENT,
+	nome_produto varchar(50),
+	quantidade int(10),
+    descricao varchar(50),
+    valor varchar(100),
+    data_cadastro DATE
+);
+
+CREATE TABLE tbContato(
+	id_contato int PRIMARY key AUTO_INCREMENT,
+	nome varchar(50),
+	email varchar(50),
+    telefone varchar(11)
+);
+
+----------------------------------------
+
+INSERT INTO tbCategoria (nome_categoria, descricao) 
+VALUES 
+('Material Escolar', 'Produtos escolares básicos'),
+('Papelaria de Escritório', 'Produtos para escritório'),
+('Tintas e Pincéis', 'Materiais artísticos'),
+('Tecnologia', 'Acessórios tecnológicos'),
+('Decoração', 'Itens de decoração para escritório'),
+('Livros e Cadernos', 'Materiais para leitura e escrita'),
+('Organização', 'Produtos para organizar seu espaço'),
+('Brinquedos Educativos', 'Itens educativos para crianças'),
+('Artigos para Festa', 'Produtos para festas e eventos'),
+('Ferramentas', 'Itens de uso geral e reparos');
+
+INSERT INTO tbProduto (nome_produto, quantidade, descricao, valor, data_cadastro) 
+VALUES 
+('Caderno Espiral', 150, 'Caderno 96 folhas', 'R$ 12,90', '2024-09-22'),
+('Caneta Esferográfica Azul', 500, 'Caneta azul básica', 'R$ 2,50', '2024-09-20'),
+('Papel Sulfite A4', 300, 'Resma de papel 500 folhas', 'R$ 23,90', '2024-09-18'),
+('Grampeador', 50, 'Grampeador médio', 'R$ 19,00', '2024-09-15'),
+('Tinta para Impressora', 20, 'Tinta preta para impressora', 'R$ 85,00', '2024-09-10'),
+('Agenda 2024', 100, 'Agenda anual 2024', 'R$ 25,00', '2024-09-25'),
+('Apontador com Depósito', 200, 'Apontador com coletor de resíduos', 'R$ 3,50', '2024-09-23'),
+('Pasta Catálogo', 50, 'Pasta com 20 plásticos', 'R$ 18,90', '2024-09-19'),
+('Estojo Simples', 80, 'Estojo para material escolar', 'R$ 10,00', '2024-09-21'),
+('Canetinha Hidrocor', 150, 'Caixa com 12 cores', 'R$ 16,50', '2024-09-24');
+
+INSERT INTO tbContato (nome, email, telefone) 
+VALUES 
+('João Silva', 'joao.silva@gmail.com', 11987654321),
+('Maria Souza', 'maria.souza@yahoo.com', 11976543210),
+('Pedro Oliveira', 'pedro.oliveira@outlook.com', 21998765432),
+('Ana Lima', 'ana.lima@gmail.com', 31987654321),
+('Carlos Costa', 'carlos.costa@hotmail.com', 41987654321),
+('Fernanda Dias', 'fernanda.dias@gmail.com', '21987654320'),
+('Ricardo Alves', 'ricardo.alves@hotmail.com', '31987654322'),
+('Larissa Monteiro', 'larissa.monteiro@yahoo.com', '41987654323'),
+('Lucas Pereira', 'lucas.pereira@gmail.com', '51987654324'),
+('Juliana Cardoso', 'juliana.cardoso@outlook.com', '61987654325');
